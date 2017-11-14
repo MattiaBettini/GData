@@ -48,33 +48,33 @@ namespace GData
         }
         #endregion
 
-        public static void Save<T>(T objtosave, string path, ModeType mode)
+        public static void Save<T>(string path, ModeType mode)
             where T : class, new()
         {
             if (mode == ModeType.Binary)
-                BinarySave<T>(objtosave, path);
+                BinarySave<T>(path);
             else
-                XmlSave<T>(objtosave, path);
+                XmlSave<T>(path);
         }
 
         #region Save Implementation
-        private static void BinarySave<T>(T objtosave, string path)
+        private static void BinarySave<T>(string path)
             where T : class, new()
         {
             using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, objtosave);
+                formatter.Serialize(stream, new T());
             }
         }
 
-        private static void XmlSave<T>(T objtosave, string path)
+        private static void XmlSave<T>(string path)
             where T : class, new()
         {
             using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-                serializer.Serialize(stream, objtosave);
+                serializer.Serialize(stream, new T());
             }
         }
         #endregion
