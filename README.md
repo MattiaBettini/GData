@@ -1,2 +1,2 @@
 # GData
-A simple Generic Serializer not thread safe for C#
+A simple Generic Abstraction for Serialize Data not thread safe for C#
